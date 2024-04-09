@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,9 +6,9 @@
     <title><%- title %></title>
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
-  <body>
-    <h1>Header</h1>
-    <main class="bg-red-500"><%- include(template) %></main>
-    <h1>Footer</h1>
+  <body class="flex min-h-screen flex-col bg-gray-100">
+    <%- include('partials/header') -%>
+    <main class="flex-grow"><%- include(template) %></main>
+    <%- include('partials/footer') -%>
   </body>
 </html>
