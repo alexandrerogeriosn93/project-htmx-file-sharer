@@ -19,6 +19,7 @@ router.post("/register", async (req, res) => {
     const newUser = await User.create({ name, email, password: hashPassword });
 
     req.session.userId = newUser.id;
+    res.setHeader("HX-Redirect", "/admin");
     res.send("Usuário registrado.");
   } catch (error) {
     res.send("Erro ao registrar usuário.");
