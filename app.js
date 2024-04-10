@@ -4,6 +4,15 @@ const SQLiteStore = require("connect-sqlite3")(session);
 const app = express();
 const port = 3000;
 
+app.use(
+  session({
+    store: new SQLiteStore(),
+    secret: "segredo",
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
+
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
