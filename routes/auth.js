@@ -45,4 +45,11 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.setHeader("HX-Redirect", "/");
+    res.send("Logout efetuado!");
+  });
+});
+
 module.exports = router;
