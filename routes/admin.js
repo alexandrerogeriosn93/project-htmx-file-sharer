@@ -7,4 +7,13 @@ router.get("/", isAuthenticated, (req, res) => {
   res.render("layout", { title: "Admin", template: "admin" });
 });
 
+router.get("/all-files", isAuthenticated, (req, res) => {
+  res.render("layout", {
+    title: "Biblioteca de arquivos",
+    template: "allfiles",
+    userId: req.session.userId,
+    files: [],
+  });
+});
+
 module.exports = router;
