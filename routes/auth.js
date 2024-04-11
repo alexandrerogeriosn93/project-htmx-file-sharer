@@ -14,6 +14,12 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    res.send("Preencha todos os dados!");
+    return;
+  }
+
   const hashPassword = await bcrypt.hash(password, 10);
 
   try {
