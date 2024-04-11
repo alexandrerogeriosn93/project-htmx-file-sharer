@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
+const { where } = require("sequelize");
 const router = express.Router();
 
 router.get("/login", (req, res) => {
@@ -23,6 +24,24 @@ router.post("/register", async (req, res) => {
     res.send("Usuário registrado.");
   } catch (error) {
     res.send("Erro ao registrar usuário.");
+  }
+});
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ where: { email } });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      req.session.userId = user.id;
+      res.setHeader("HX-Redirect", "/admin");
+      res.send("Usuário logado.");
+    } else {
+      res.send("Falha no login: credenciais inválidas!");
+    }
+  } catch (error) {
+    res.send("Erro ao autenticar usuário.");
   }
 });
 
