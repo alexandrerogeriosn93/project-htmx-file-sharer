@@ -56,6 +56,18 @@ router.get("/fetch-files", isAuthenticated, async (req, res) => {
   res.render("partials/userFiles", { files: userFiles });
 });
 
+router.get("/all-files/data", isAuthenticated, async (req, res) => {
+  const allFiles = await File.findAll({
+    include: [
+      {
+        model: User,
+        attribute: ["name"],
+      },
+    ],
+  });
+  res.render("partials/allFilesList", { files: allFiles });
+});
+
 router.delete("/delete-file/:fileId", isAuthenticated, async (req, res) => {
   try {
     const fileId = req.params.fileId;
@@ -78,7 +90,9 @@ router.delete("/delete-file/:fileId", isAuthenticated, async (req, res) => {
     });
 
     res.render("partials/userFiles", { files: userFiles });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send("Erro ao deletar arquivo!");
+  }
 });
 
 module.exports = router;
