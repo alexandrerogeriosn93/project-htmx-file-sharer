@@ -11,4 +11,8 @@ document.body.addEventListener("htmx:afterRequest", (event) => {
   if (redirect) {
     window.location.href = redirect;
   }
+
+  if (event.target.getAttribute("id") === "file-form") {
+    event.target.reset();
+  }
 });
