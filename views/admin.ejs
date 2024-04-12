@@ -3,7 +3,9 @@
   <form
     hx-post="http://localhost:3000/admin/upload"
     class="mx-auto max-w-sm"
-    hx-target="#msg"
+    hx-target="#file-list"
+    hx-target-error="#msg"
+    enctype="multipart/form-data"
   >
     <div class="mb-4">
       <label for="name" class="mb-2 block text-sm font-bold text-gray-700">
@@ -41,5 +43,6 @@
       Enviar
     </button>
   </form>
+
   <div id="file-list" hx-get="/admin/fetch-files" hx-trigger="load"></div>
 </div>

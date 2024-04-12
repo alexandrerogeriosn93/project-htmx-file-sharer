@@ -1,5 +1,7 @@
 const express = require("express");
+const upload = require("../config/multerConfig");
 const { User } = require("../models");
+const { File } = require("../models");
 const isAuthenticated = require("../middleware/isAuthenticated");
 const router = express.Router();
 
@@ -15,5 +17,29 @@ router.get("/all-files", isAuthenticated, (req, res) => {
     files: [],
   });
 });
+
+router.post(
+  "/upload",
+  isAuthenticated,
+  upload.single("file"),
+  async (req, res) => {
+    const { name, description } = req.body;
+    const userId = req.session.userId;
+
+    if (!name || !req.file) {
+      res.status(422).send("Preencha todos os campos!");
+      return;
+    }
+
+    const path = req.file.path;
+
+    try {
+      await File.create({ name, description, path, userId });
+      res.send("Arquivo criado com sucesso!");
+    } catch (error) {
+      res.status(500).send("Erro ao criar arquivo!");
+    }
+  },
+);
 
 module.exports = router;
