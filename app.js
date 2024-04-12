@@ -25,6 +25,7 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use("/uploads", express.static("uploads"));
 
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");

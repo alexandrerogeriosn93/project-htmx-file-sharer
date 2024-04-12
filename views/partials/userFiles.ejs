@@ -7,7 +7,13 @@
         <div class="flex justify-between items-center">
             <span class="text-gray-700"><%= file.name %></span>
             <div>
-                <a href="" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-2">Download</a>
+                <a 
+                  href="/<%= file.path%>"
+                  download="<%= file.name%>"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-2"
+                >
+                  Download
+                </a>
                 <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded mr-2">Deletar</button>
             </div>
         </div>
