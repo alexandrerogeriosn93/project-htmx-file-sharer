@@ -14,7 +14,13 @@
                 >
                   Download
                 </a>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded mr-2">Deletar</button>
+                <button 
+                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded mr-2"
+                  hx-delete="/admin/delete-file/<%= file.id %>"
+                  hx-target="#file-list"
+                >
+                  Deletar
+                </button>
             </div>
         </div>
     </li>
