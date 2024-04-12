@@ -3,6 +3,7 @@ const upload = require("../config/multerConfig");
 const { User } = require("../models");
 const { File } = require("../models");
 const isAuthenticated = require("../middleware/isAuthenticated");
+const { where } = require("sequelize");
 const router = express.Router();
 
 router.get("/", isAuthenticated, (req, res) => {
@@ -35,11 +36,22 @@ router.post(
 
     try {
       await File.create({ name, description, path, userId });
-      res.send("Arquivo criado com sucesso!");
+      const userFiles = await File.findAll({
+        where: { userId: req.session.userId },
+      });
+
+      res.render("partials/userFiles", { files: userFiles });
     } catch (error) {
       res.status(500).send("Erro ao criar arquivo!");
     }
   },
 );
+
+router.get("/fetch-files", isAuthenticated, async (req, res) => {
+  const userFiles = await File.findAll({
+    where: { userId: req.session.userId },
+  });
+  res.render("partials/userFiles", { files: userFiles });
+});
 
 module.exports = router;

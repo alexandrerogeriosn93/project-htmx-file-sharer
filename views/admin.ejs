@@ -1,48 +1,49 @@
 <div class="container mx-auto p-4">
   <h2 class="mb-4 text-center text-2xl font-bold">Página de Administração</h2>
-  <form
-    hx-post="http://localhost:3000/admin/upload"
-    class="mx-auto max-w-sm"
-    hx-target="#file-list"
-    hx-target-error="#msg"
-    enctype="multipart/form-data"
-  >
-    <div class="mb-4">
-      <label for="name" class="mb-2 block text-sm font-bold text-gray-700">
-        Nome do arquivo:
-      </label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        class="w-full appearance-none rounded border px-3 py-2 text-gray-700 shadow"
-      />
-    </div>
-    <div class="mb-4">
-      <label
-        for="description"
-        class="mb-2 block text-sm font-bold text-gray-700"
-      >
-        Descrição do arquivo:
-      </label>
-      <textarea
-        name="description"
-        id="description"
-        class="w-full appearance-none rounded border px-3 py-2 text-gray-700 shadow"
-      ></textarea>
-    </div>
-    <div class="mb-4">
-      <label for="file" class="mb-2 block text-sm font-bold text-gray-700">
-        Selecione o arquivo:
-      </label>
-      <input type="file" name="file" id="file" />
-    </div>
-    <button
-      class="rounded bg-indigo-500 px-4 py-2 font-bold text-white hover:bg-indigo-700"
+  <div class="mx-auto w-1/2">
+    <form
+      hx-post="http://localhost:3000/admin/upload"
+      class="mx-auto max-w-sm"
+      hx-target="#file-list"
+      hx-target-error="#msg"
+      enctype="multipart/form-data"
     >
-      Enviar
-    </button>
-  </form>
-
-  <div id="file-list" hx-get="/admin/fetch-files" hx-trigger="load"></div>
+      <div class="mb-4">
+        <label for="name" class="mb-2 block text-sm font-bold text-gray-700">
+          Nome do arquivo:
+        </label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="w-full appearance-none rounded border px-3 py-2 text-gray-700 shadow"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          for="description"
+          class="mb-2 block text-sm font-bold text-gray-700"
+        >
+          Descrição do arquivo:
+        </label>
+        <textarea
+          name="description"
+          id="description"
+          class="w-full appearance-none rounded border px-3 py-2 text-gray-700 shadow"
+        ></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="file" class="mb-2 block text-sm font-bold text-gray-700">
+          Selecione o arquivo:
+        </label>
+        <input type="file" name="file" id="file" />
+      </div>
+      <button
+        class="rounded bg-indigo-500 px-4 py-2 font-bold text-white hover:bg-indigo-700"
+      >
+        Enviar
+      </button>
+    </form>
+    <div id="file-list" hx-get="/admin/fetch-files" hx-trigger="load"></div>
+  </div>
 </div>
